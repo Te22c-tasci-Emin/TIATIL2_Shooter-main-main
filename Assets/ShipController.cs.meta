@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f9d4a490aa841f34faf529ad026cd248
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - boltPrefab: {fileID: 1287502262990996, guid: 4dd15c7fe51711c48ba135fef149bbf8,
+      type: 3}
+  - gun: {fileID: 1287502262990996, guid: 4dd15c7fe51711c48ba135fef149bbf8, type: 3}
+  - Enemycombatent: {fileID: 1455718659814362, guid: bf43fe3ed09cec246b4f2f367f9817fa,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
