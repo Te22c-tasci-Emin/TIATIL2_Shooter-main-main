@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,34 +27,39 @@ public class ShipController : MonoBehaviour
 
   // float timeBetweenPowerup = 80f;
   float timeSinceLastPowerup = 0;
-  bool isPoweredUp = true;
+  bool isPoweredUp = false;
 
   [SerializeField]
   GameObject ExplosionPrefab;
+  public static int deathCounter = 0;
 
+  [SerializeField]
+
+  private int maxHealth = 3;
+  private int currentHealth;
+
+
+  void Start()
+  {
+    currentHealth = maxHealth;
+  }
   // Update is called once per frame
   void Update()
   {
 
     // Om vi just nu har powerup (boolen är true): dra av från timern
     // Om timern < 0: sätt boolen till false
-    if (isPoweredUp == true)
+    if (isPoweredUp == false)
     {
       timeSinceLastPowerup -= Time.deltaTime;
       timeBetweenShots = 0.25f;
     }
 
 
-    else
-    {
-
-
-    }
-
-    if (timeSinceLastPowerup < 0)
+    else if (timeSinceLastPowerup > 0)
     {
       isPoweredUp = false;
-
+      timeBetweenShots = 0.5f;
     }
 
 
@@ -91,7 +97,6 @@ public class ShipController : MonoBehaviour
   }
 
 
-
   public void Powerup()
   {
 
@@ -101,26 +106,29 @@ public class ShipController : MonoBehaviour
     // sätt timern till 5
 
   }
+
   void OnTriggerEnter2D(Collider2D other)
   {
     if (other.gameObject.tag == "enemy")
     {
-      Instantiate(ExplosionPrefab,transform.position,Quaternion.identity);
-      Destroy(this.gameObject);
 
-      SceneManager.LoadScene(1);
 
+      Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+
+      currentHealth--;
+
+      if (currentHealth <= 0)
+        {
+          Destroy(this.gameObject);
+          SceneManager.LoadScene(1);
+        }
+
+      
     }
-
+    if (deathCounter >= 15)
+    {
+      SceneManager.LoadScene(2);
+    }
   }
 }
 
-
-/*
-- Skjuta skott
-- Fiender
-- Liv
-- Score
-- Startmeny
-*/
-//yuh

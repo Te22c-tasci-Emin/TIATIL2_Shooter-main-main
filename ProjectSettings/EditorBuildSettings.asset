@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameOver.unity
     guid: 658497037fbc8d6468b30cee4bd6d547
+  - enabled: 1
+    path: Assets/Boss Fight.unity
+    guid: 6bfe047a35c645e418cb0a28de4f7557
   m_configObjects: {}
