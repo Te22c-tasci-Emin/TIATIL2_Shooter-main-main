@@ -45,7 +45,9 @@ public class EnemyCombatent : MonoBehaviour
 
             if (transform.position.y < -3.5f)
             {
+
                 Destroy(this.gameObject);
+
             }
         }
 
@@ -59,10 +61,17 @@ public class EnemyCombatent : MonoBehaviour
             Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
             deathCounter++;
             health--;
-            if (health <= 0)
+            if (health <= 0 && isBoss)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else if (health <= 0)
             {
                 Destroy(this.gameObject);
+
             }
+
+
         }
 
         if (deathCounter >= 15)
