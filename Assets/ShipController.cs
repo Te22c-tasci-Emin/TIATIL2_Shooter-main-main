@@ -31,7 +31,7 @@ public class ShipController : MonoBehaviour
 
   [SerializeField]
   GameObject ExplosionPrefab;
-  public static int deathCounter = 0;
+ 
 
   [SerializeField]
 
@@ -114,7 +114,6 @@ public class ShipController : MonoBehaviour
 
 
       Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-
       currentHealth--;
 
       if (currentHealth <= 0)
@@ -125,10 +124,6 @@ public class ShipController : MonoBehaviour
 
       
     }
-    if (deathCounter >= 15)
-    {
-      SceneManager.LoadScene(2);
-    }
-  }
+}
 }
 

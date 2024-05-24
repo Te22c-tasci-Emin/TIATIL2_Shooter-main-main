@@ -195,13 +195,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1520511283031028370, guid: bf43fe3ed09cec246b4f2f367f9817fa,
         type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1520511283031028370, guid: bf43fe3ed09cec246b4f2f367f9817fa,
+        type: 3}
       propertyPath: isBoss
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1520511283031028370, guid: bf43fe3ed09cec246b4f2f367f9817fa,
         type: 3}
       propertyPath: sineWaveAmplitude
-      value: 3.5
+      value: 4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -1520511283031028370, guid: bf43fe3ed09cec246b4f2f367f9817fa,
+        type: 3}
+      propertyPath: sineWaveFrequency
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 1455718659814362, guid: bf43fe3ed09cec246b4f2f367f9817fa, type: 3}
       propertyPath: m_Name

@@ -5,6 +5,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyCombatent : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class EnemyCombatent : MonoBehaviour
     [SerializeField] private float sineWaveFrequency = 1;
     [SerializeField] private float sineWaveAmplitude = 1;
     [SerializeField] private int health = 3;
+    private static int deathCounter = 0;
     [SerializeField]
     GameObject ExplosionPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,22 +57,25 @@ public class EnemyCombatent : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
             Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
-            ShipController.deathCounter++;
+            deathCounter++;
             health--;
             if (health <= 0)
             {
                 Destroy(this.gameObject);
             }
-
-            //if()
-            //GameObject.Find("spawner").GetComponent<SpawnerController>().SpawnerSpawn
-
         }
 
-
-
+        if (deathCounter >= 15)
+        {
+            deathCounter = 0;
+            SceneManager.LoadScene(2);
+        }
     }
+
 }
+
+
+
 
 //om man dödat 25 enemies då gå boss fighten igång
 
