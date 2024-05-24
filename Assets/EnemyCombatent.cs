@@ -10,10 +10,16 @@ using UnityEngine.SceneManagement;
 public class EnemyCombatent : MonoBehaviour
 {
     [SerializeField] private bool isBoss = false;
-    [SerializeField] private float sineWaveFrequency = 1;
-    [SerializeField] private float sineWaveAmplitude = 1;
     [SerializeField] private int health = 3;
+    [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject boltPrefab;
     private static int deathCounter = 0;
+    private bool invertMovement = false;
+
+    float timeSinceLastShot = 0;
+    float timeBetweenShots = 0;
+    [SerializeField] float speed = 2.5f;
+
     [SerializeField]
     GameObject ExplosionPrefab;
 
@@ -32,10 +38,46 @@ public class EnemyCombatent : MonoBehaviour
     void Update()
 
     {
-        float speed = 2.5f;
+
+
         if (isBoss)
         {
-            Vector2 movement = new Vector2(Mathf.Sin(Time.time * sineWaveFrequency) * sineWaveAmplitude, 0);
+
+            timeSinceLastShot += Time.deltaTime;
+            if (timeSinceLastShot > timeBetweenShots)
+            {
+                timeBetweenShots = UnityEngine.Random.Range(0.2f, 1.4f);
+                timeSinceLastShot = 0;
+                // Om boolen är true, skjut det bättre skottet
+                // Annars skjut det vanliga
+                GameObject bulletInstance = Instantiate(boltPrefab, gun.transform.position, Quaternion.identity);
+                bulletInstance.transform.localEulerAngles = new Vector3(0f, 0f, 180f);
+            }
+            Vector3 screenBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+            // Vector2 movement = new Vector2(Mathf.Sin(Time.time * sineWaveFrequency) * sineWaveAmplitude, 0);
+            Vector2 movement = new Vector2(1, 0);
+            if (transform.localPosition.x >= screenBorder.x)
+            {
+
+                invertMovement = true;
+
+            }
+            else if (transform.localPosition.x <= -screenBorder.x)
+            {
+                invertMovement = false;
+            }
+
+
+            if (invertMovement)
+            {
+                movement.x = -Mathf.Abs(movement.x); // Ensure movement is negative
+            }
+            else
+            {
+                movement.x = Mathf.Abs(movement.x); // Ensure movement is positive
+            }
+
+
             transform.Translate(movement * speed * Time.deltaTime);
         }
         else
@@ -63,13 +105,14 @@ public class EnemyCombatent : MonoBehaviour
             health--;
             if (health <= 0 && isBoss)
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(3);
             }
             else if (health <= 0)
             {
                 Destroy(this.gameObject);
 
             }
+
 
 
         }
@@ -80,6 +123,8 @@ public class EnemyCombatent : MonoBehaviour
             SceneManager.LoadScene(2);
         }
     }
+
+
 
 }
 

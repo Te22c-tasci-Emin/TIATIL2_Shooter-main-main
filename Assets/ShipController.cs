@@ -21,22 +21,18 @@ public class ShipController : MonoBehaviour
   [SerializeField]
   float timeBetweenShots = 0.5f;
   float timeSinceLastShot = 0;
-
-  [SerializeField]
-  GameObject Enemycombatent;
-
   // float timeBetweenPowerup = 80f;
   float timeSinceLastPowerup = 0;
   bool isPoweredUp = false;
 
   [SerializeField]
   GameObject ExplosionPrefab;
- 
+
 
   [SerializeField]
 
   private int maxHealth = 3;
-  private int currentHealth;
+  public int currentHealth;
 
 
   void Start()
@@ -109,21 +105,24 @@ public class ShipController : MonoBehaviour
 
   void OnTriggerEnter2D(Collider2D other)
   {
-    if (other.gameObject.tag == "enemy")
+    if (other.gameObject.tag == "enemy" || other.gameObject.tag == "bullet")
     {
 
 
       Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
       currentHealth--;
+      Destroy(other.gameObject);
 
       if (currentHealth <= 0)
-        {
-          Destroy(this.gameObject);
-          SceneManager.LoadScene(1);
-        }
+      {
+        
+        Destroy(this.gameObject);
+        SceneManager.LoadScene(1);
+      }
 
-      
     }
-}
+
+  }
+
 }
 

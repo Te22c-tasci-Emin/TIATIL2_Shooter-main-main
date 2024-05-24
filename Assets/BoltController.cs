@@ -9,8 +9,7 @@ public class BoltController : MonoBehaviour
 
   void Update()
   {
-    Vector2 movement = new Vector2(0, 1);
-    transform.Translate(movement * speed * Time.deltaTime);
+    transform.Translate(transform.TransformDirection(transform.up) * speed * Time.deltaTime);
 
     if (transform.position.y > 5.5f)
     {
@@ -24,7 +23,8 @@ public class BoltController : MonoBehaviour
     {
       Destroy(this.gameObject);
     }
-
   }
+
+  
 
 }

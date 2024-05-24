@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Boss Fight.unity
     guid: 6bfe047a35c645e418cb0a28de4f7557
+  - enabled: 1
+    path: Assets/Win.unity
+    guid: 8e7298b8eb6590b43b4a49621896a67d
   m_configObjects: {}
